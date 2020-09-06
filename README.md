@@ -21,3 +21,14 @@ Experimental beta version.
 The config file is provided on the command line:
 
 `ola_trigger wiz_light.conf`
+
+**DMX protocol** 
+
+* Channel 1 lamp on/off. Value 0-114 lamp off. 140-255 lamp on  
+* Channel 2 Dimmer. Value 10-100 (10%-100%)    
+* ~~Cannel 3 Color temperature. Value 0-255 (2200-6500K)~~  
+* ~~Channel 4 Cold white intensity. Value 1-255~~  
+* ~~Channel 5 Warm white intensity. Value 1-255~~  
+* ~~Channel 6 Red intensity. Value 1-255~~  
+* ~~Channel 7 Green intensity. Value 1-255~~  
+* ~~Channel 8 Blue intensity. Value 1-255~~  
