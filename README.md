@@ -1,5 +1,5 @@
 **OLA trigger config to control [WiZ lights](https://www.wizconnected.com/en/consumer/products/) with DMX (Art-Net, sACN or via DMX input)**  
-Experimental version.  
+Experimental beta version.  
 
 **Requirements**
 
