@@ -11,7 +11,7 @@ Experimental version.
 **Installation**
   
 * Download the [wiz_light.conf](wiz_light.conf) and edit the configuration section
-* Download the [wiz_flow.json](wiz_flow.json) file, import it into Node-RED and edit the Hue bridge settings
+* Download the [wiz_flow.json](wiz_flow.json) file, import it into Node-RED and edit the lamp IP address in the UDP out node in Node-RED
 
 [OLA trigger documentation](https://www.openlighting.org/ola/advanced-topics/ola-dmx-trigger/)
 
