@@ -1,0 +1,176 @@
+[
+    {
+        "id": "cfc22486.4ebb18",
+        "type": "tab",
+        "label": "WiZ DMX beta",
+        "disabled": false,
+        "info": "Copyright (C) 2020 Johan Nilsson\n[https://gobo.ws]()"
+    },
+    {
+        "id": "3ecc671f.8b7628",
+        "type": "udp out",
+        "z": "cfc22486.4ebb18",
+        "name": "UDP out",
+        "addr": "192.168.0.1",
+        "iface": "",
+        "port": "38899",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 960,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "25ad7ce2.6b6134",
+        "type": "repeat",
+        "z": "cfc22486.4ebb18",
+        "name": "Repeat 3x (so we don't miss any packets)",
+        "repetitions": "3",
+        "elseOutput": false,
+        "outputs": 1,
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "3ecc671f.8b7628",
+                "e4d24164.109e58"
+            ]
+        ]
+    },
+    {
+        "id": "1a048e0b.4e3efa",
+        "type": "delay",
+        "z": "cfc22486.4ebb18",
+        "name": "Delay 25 ms",
+        "pauseType": "delay",
+        "timeout": "25",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 850,
+        "y": 220,
+        "wires": [
+            [
+                "25ad7ce2.6b6134"
+            ]
+        ]
+    },
+    {
+        "id": "7d4b1157.ec0f68",
+        "type": "http response",
+        "z": "cfc22486.4ebb18",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 450,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e4d24164.109e58",
+        "type": "function",
+        "z": "cfc22486.4ebb18",
+        "name": "Fix",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "1a048e0b.4e3efa"
+            ]
+        ]
+    },
+    {
+        "id": "ec670835.93e66",
+        "type": "comment",
+        "z": "cfc22486.4ebb18",
+        "name": "Only to prevent \"ERR_HTTP_HEADERS_SENT\"",
+        "info": "",
+        "x": 580,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "766792fe.b5db64",
+        "type": "http in",
+        "z": "cfc22486.4ebb18",
+        "name": "",
+        "url": "/wiz-chan2",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 240,
+        "wires": [
+            [
+                "8199449d.64f9b"
+            ]
+        ]
+    },
+    {
+        "id": "f950b9c.a65ce48",
+        "type": "template",
+        "z": "cfc22486.4ebb18",
+        "name": "On/off",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"state\":{{ req.query.state }}}}",
+        "x": 230,
+        "y": 200,
+        "wires": [
+            [
+                "e4d24164.109e58",
+                "7d4b1157.ec0f68"
+            ]
+        ]
+    },
+    {
+        "id": "8199449d.64f9b",
+        "type": "template",
+        "z": "cfc22486.4ebb18",
+        "name": "Dimmer 10-100",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"dimming\":{{ req.query.dimming }}}}",
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "e4d24164.109e58",
+                "7d4b1157.ec0f68"
+            ]
+        ]
+    },
+    {
+        "id": "bab3c644.ebc418",
+        "type": "http in",
+        "z": "cfc22486.4ebb18",
+        "name": "",
+        "url": "/wiz-chan1",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 200,
+        "wires": [
+            [
+                "f950b9c.a65ce48"
+            ]
+        ]
+    }
+]
