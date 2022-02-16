@@ -1,0 +1,77 @@
+[
+    {
+        "id": "a7e0f93e4cdf3471",
+        "type": "tab",
+        "label": "WiZ Smart plug",
+        "disabled": false,
+        "info": "Copyright (C) 2022 Johan Nilsson\n[https://gobo.ws]()",
+        "env": []
+    },
+    {
+        "id": "304a6c4dc2326fdf",
+        "type": "repeat",
+        "z": "a7e0f93e4cdf3471",
+        "name": "Repeat 3x (so we don't miss any packets)",
+        "repetitions": "3",
+        "elseOutput": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "ecca234e77a181d5"
+            ]
+        ]
+    },
+    {
+        "id": "ecca234e77a181d5",
+        "type": "udp out",
+        "z": "a7e0f93e4cdf3471",
+        "name": "Power plug",
+        "addr": "192.168.0.1",
+        "iface": "",
+        "port": "38899",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 710,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1605fbfbdd8d620d",
+        "type": "template",
+        "z": "a7e0f93e4cdf3471",
+        "name": "On/off",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"state\":{{ req.query.state }}}}",
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "304a6c4dc2326fdf"
+            ]
+        ]
+    },
+    {
+        "id": "0c73b5f757ba2b14",
+        "type": "http in",
+        "z": "a7e0f93e4cdf3471",
+        "name": "",
+        "url": "/wiz-plug",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "1605fbfbdd8d620d"
+            ]
+        ]
+    }
+]
