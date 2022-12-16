@@ -1,8 +1,7 @@
 **OLA trigger config files to control [WiZ lights & smart plugs](https://www.wizconnected.com/en/consumer/products/) with DMX (Art-Net, sACN or via DMX input)**  
 Experimental beta version, some work left to do.  
-I have a working solution for controlling RGBW but there is some stuff left to do and it is uncertain if and when it will be published.  
+I have a working solution for controlling RGBW but there is some stuff left to do but I will publish a public beta by the end of 2022  
 
-2022-02-05 I have started to look at this project again thanks to Mike Holm, will add support for scenes and functions like rebooting devices using DMX.
 
 **Requirements**
 
