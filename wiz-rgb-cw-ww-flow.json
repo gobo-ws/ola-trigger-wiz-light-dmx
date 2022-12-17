@@ -1,0 +1,352 @@
+[
+    {
+        "id": "f718d0d10f4a38c8",
+        "type": "tab",
+        "label": "WiZ DMX",
+        "disabled": false,
+        "info": " Copyright (C) 2022 Johan Nilsson\r\n https://gobo.ws",
+        "env": []
+    },
+    {
+        "id": "608efa9a243502ff",
+        "type": "http request",
+        "z": "f718d0d10f4a38c8",
+        "name": "DMX",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:9090/get_dmx?u=1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "6b5a82521868e02c"
+            ]
+        ]
+    },
+    {
+        "id": "a7e70c7716c943b2",
+        "type": "template",
+        "z": "f718d0d10f4a38c8",
+        "name": "RGB",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"r\":{{payload.r}},\"g\":{{payload.g}},\"b\":{{payload.b}}}}",
+        "output": "str",
+        "x": 650,
+        "y": 200,
+        "wires": [
+            [
+                "dd306069eaf10f9b"
+            ]
+        ]
+    },
+    {
+        "id": "6b5a82521868e02c",
+        "type": "function",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "func": "msg.payload.r = msg.payload.dmx[2];\nmsg.payload.g = msg.payload.dmx[3];\nmsg.payload.b = msg.payload.dmx[4];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "a7e70c7716c943b2",
+                "69e61f3d8dc7b2bd"
+            ]
+        ]
+    },
+    {
+        "id": "dd306069eaf10f9b",
+        "type": "repeat",
+        "z": "f718d0d10f4a38c8",
+        "name": "Repeat 3x (so we don't miss any packets)",
+        "repetitions": "3",
+        "elseOutput": false,
+        "outputs": 1,
+        "x": 940,
+        "y": 200,
+        "wires": [
+            [
+                "bff4c02629a08610"
+            ]
+        ]
+    },
+    {
+        "id": "bff4c02629a08610",
+        "type": "udp out",
+        "z": "f718d0d10f4a38c8",
+        "name": "Lamp 1",
+        "addr": "192.168.1.1",
+        "iface": "",
+        "port": "38899",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 1180,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "180e53db2eeb5a9e",
+        "type": "http in",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "url": "/wiz-lamp1-chan3-5-rgb",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "608efa9a243502ff"
+            ]
+        ]
+    },
+    {
+        "id": "69e61f3d8dc7b2bd",
+        "type": "http response",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "4aafd3cb4d827b9d",
+        "type": "http in",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "url": "/wiz-lamp1-chan6-7-cw-ww",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "3f2a4c937f8be792"
+            ]
+        ]
+    },
+    {
+        "id": "da70d5ac22e06e76",
+        "type": "template",
+        "z": "f718d0d10f4a38c8",
+        "name": "CW+WW",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"c\":{{payload.c}},\"w\":{{payload.w}}}}",
+        "output": "str",
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "dd306069eaf10f9b"
+            ]
+        ]
+    },
+    {
+        "id": "3f2a4c937f8be792",
+        "type": "http request",
+        "z": "f718d0d10f4a38c8",
+        "name": "DMX",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:9090/get_dmx?u=1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "83c9c23e5b91edcf"
+            ]
+        ]
+    },
+    {
+        "id": "83c9c23e5b91edcf",
+        "type": "function",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "func": "msg.payload.c = msg.payload.dmx[5];\nmsg.payload.w = msg.payload.dmx[6];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "da70d5ac22e06e76",
+                "69e61f3d8dc7b2bd"
+            ]
+        ]
+    },
+    {
+        "id": "14045cda8c0262b2",
+        "type": "comment",
+        "z": "f718d0d10f4a38c8",
+        "name": "Lamp 1",
+        "info": "",
+        "x": 90,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "8cf781b125d12c50",
+        "type": "template",
+        "z": "f718d0d10f4a38c8",
+        "name": "Color temp 2200-6500K",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"temp\":{{ req.query.ct }}}}",
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "dd306069eaf10f9b"
+            ]
+        ]
+    },
+    {
+        "id": "434c4d03e033185f",
+        "type": "http in",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "url": "/wiz-lamp1-chan2",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 160,
+        "wires": [
+            [
+                "8cf781b125d12c50"
+            ]
+        ]
+    },
+    {
+        "id": "3f6a1ed8fc28a281",
+        "type": "http in",
+        "z": "f718d0d10f4a38c8",
+        "name": "",
+        "url": "/wiz-lamp1-chan1",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "cae5c56f4af84b1d",
+                "70b168f20f6e00a4"
+            ]
+        ]
+    },
+    {
+        "id": "099882df1838955f",
+        "type": "comment",
+        "z": "f718d0d10f4a38c8",
+        "name": "Edit Lamp 1 hostname",
+        "info": "",
+        "x": 1180,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "cae5c56f4af84b1d",
+        "type": "template",
+        "z": "f718d0d10f4a38c8",
+        "name": "Off",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"state\":{{ req.query.state }}}}",
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "dd306069eaf10f9b"
+            ]
+        ]
+    },
+    {
+        "id": "73faea0e27d63a37",
+        "type": "template",
+        "z": "f718d0d10f4a38c8",
+        "name": "On + Dimmer 10-100 %",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"method\":\"setPilot\",\"params\":{\"state\":true,\"dimming\":{{ payload.dimming }}}}",
+        "x": 750,
+        "y": 120,
+        "wires": [
+            [
+                "dd306069eaf10f9b"
+            ]
+        ]
+    },
+    {
+        "id": "70b168f20f6e00a4",
+        "type": "range",
+        "z": "f718d0d10f4a38c8",
+        "minin": "11",
+        "maxin": "255",
+        "minout": "10",
+        "maxout": "100",
+        "action": "scale",
+        "round": true,
+        "property": "payload.dimming",
+        "name": "Scale DMX input 11-255 to 10-100 %",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "73faea0e27d63a37"
+            ]
+        ]
+    },
+    {
+        "id": "dba08477a0f7c767",
+        "type": "comment",
+        "z": "f718d0d10f4a38c8",
+        "name": "Edit OLA hostname in the DMX\" block\"",
+        "info": "",
+        "x": 390,
+        "y": 280,
+        "wires": []
+    }
+]
