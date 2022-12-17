@@ -1,5 +1,5 @@
 **OLA trigger config files to control [WiZ lights & smart plugs](https://www.wizconnected.com/en/consumer/products/) with DMX (Art-Net, sACN or via DMX input)**  
-Experimental beta version, some work left to do.    
+Beta version, some functions not public implemented yet like support for scenes and reboot. 
 
 
 
