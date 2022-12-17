@@ -12,8 +12,8 @@ Experimental beta version, some work left to do.
 
 **Installation**
   
-* Download the [wiz_light.conf](wiz-rgb-cw-ww.conf) and edit the configuration section
-* Download the [wiz_flow.json](wiz-rgb-cw-ww-flow.json) file, import it into Node-RED and edit the IP addresses to the lamps in the UDP out node in Node-RED and the OLA hostname in the DMX "blocks"
+* Download the [wiz-rgb-cw-ww.conf](wiz-rgb-cw-ww.conf) and edit the configuration section
+* Download the [wiz-rgb-cw-ww-flow.json](wiz-rgb-cw-ww-flow.json) file, import it into Node-RED and edit the IP addresses to the lamps in the UDP out node in Node-RED and the OLA hostname in the DMX "blocks"
 
 [OLA trigger documentation](https://www.openlighting.org/ola/advanced-topics/ola-dmx-trigger/)
 
