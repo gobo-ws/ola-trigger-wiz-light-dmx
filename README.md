@@ -1,8 +1,6 @@
 **OLA trigger config files to control [WiZ lights & smart plugs](https://www.wizconnected.com/en/consumer/products/) with DMX (Art-Net, sACN or via DMX input)**  
 Experimental beta version, some work left to do.    
 
-2022-12-16 updates: I have a working solution for controlling RGBW but there is some stuff left to do but I plan to publish a public beta by the end of the year  
-
 
 
 **Requirements**
@@ -14,8 +12,8 @@ Experimental beta version, some work left to do.
 
 **Installation**
   
-* Download the [wiz_light.conf](wiz_light.conf) and edit the configuration section
-* Download the [wiz_flow.json](wiz_flow.json) file, import it into Node-RED and edit the lamp IP address in the UDP out node in Node-RED
+* Download the [wiz_light.conf](wiz-rgb-cw-ww.conf) and edit the configuration section
+* Download the [wiz_flow.json](wiz-rgb-cw-ww-flow.json) file, import it into Node-RED and edit the IP addresses to the lamps in the UDP out node in Node-RED and the OLA hostname in the DMX "blocks"
 
 [OLA trigger documentation](https://www.openlighting.org/ola/advanced-topics/ola-dmx-trigger/)
 
@@ -24,15 +22,8 @@ Experimental beta version, some work left to do.
 * Before running ola_trigger, make sure that olad is running and the universe has been configured with a DMX512 source.  
 The config file is provided on the command line:
 
-`ola_trigger wiz_light.conf`
+`wiz-rgb-cw-ww.conf`
 
 **DMX protocol** 
 
-* Channel 1 lamp on/off. Value 0-114 lamp off. 140-255 lamp on  
-* Channel 2 Dimmer. Value 10-100 (10%-100%)    
-* ~~Channel 3 Color temperature. Value 0-255 (2200-6500K)~~  
-* ~~Channel 4 Cold white intensity. Value 1-255~~  
-* ~~Channel 5 Warm white intensity. Value 1-255~~  
-* ~~Channel 6 Red intensity. Value 1-255~~  
-* ~~Channel 7 Green intensity. Value 1-255~~  
-* ~~Channel 8 Blue intensity. Value 1-255~~  
+See the config file
