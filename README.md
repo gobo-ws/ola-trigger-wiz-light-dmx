@@ -37,6 +37,6 @@ The config file is provided on the command line:
 | 2           | 70\-80    | Lamp 1 color temperature 6500K                  |
 | 3           | 0\-255    | Lamp 1 Red intensity                            |
 | 4           | 0\-255    | Lamp 1 Green intensity                          |
-| 5           | 0\-255    | Lamp 1 Green intensity                          |
+| 5           | 0\-255    | Lamp 1 Blue intensity                          |
 | 6           | 0\-255    | Lamp 1 Cold white intensity                     |
 | 7           | 0\-255    | Lamp 1 Warm white intensity                     |
